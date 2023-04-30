@@ -13,7 +13,9 @@ connectDB();
 const app = express()
 
 app.use(express.json())
+app.use('/api/v1/products/', products)
 
+// app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000
 
