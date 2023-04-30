@@ -1,11 +1,19 @@
+const dotenv = require('dotenv');
+dotenv.config({path: './config/config.env'});
+
 const express = require('express');
-
+const products = require('./routes/products')
+const connectDB = require('./config/db')
 const colors = require('colors');
+// const errorHandler = require('./middlewares/error');
 
+
+connectDB();
 
 const app = express()
 
 app.use(express.json())
+
 
 const PORT = process.env.PORT || 5000
 
