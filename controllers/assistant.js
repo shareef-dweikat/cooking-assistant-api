@@ -6,12 +6,11 @@ const axios = require('axios')
 // @route POST /api/v1/query/
 // @access Public 
 exports.query = asyncHandler(async (req, res, next) => {
-    const API_KEY = process.env.OPENAI_API_KEY
     const message = getQueryTemplateMessage(req.query.dish)
 
     const config = {
         headers: {
-            "Authorization": API_KEY,
+            "Authorization": process.env.OPENAI_API_KEY,
             "Content-Type": "application/json"
         }
     };
