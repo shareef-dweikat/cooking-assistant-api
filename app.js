@@ -2,7 +2,7 @@ const path = require('path');
 const cors = require('cors');
 
 const dotenv = require('dotenv');
-dotenv.config({path: './config/config.env'});
+dotenv.config({ path: './config/config.env' });
 
 const express = require('express');
 const products = require('./routes/products')
@@ -18,16 +18,12 @@ connectDB();
 
 const app = express()
 
-app.use(cors({
-    origin: '*'
-}));
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json())
 
 app.use('/api/v1/products/', products)
 app.use('/api/v1/applications/', applications)
-app.use('/api/v1/assistant/', assistant)
+app.use('/api/v1/assistant/', cors(), assistant)
 app.use('/api/v1/admin/users/', users);
 app.use('/api/v1/auth/', auth);
 
