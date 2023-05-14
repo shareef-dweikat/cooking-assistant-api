@@ -4,7 +4,7 @@ const axios = require('axios')
 
 // @desc make a query
 // @route POST /api/v1/query/
-// @access Public 
+// @access Private 
 exports.query = asyncHandler(async (req, res, next) => {
     const message = getQueryTemplateMessage(req.query.dish)
 

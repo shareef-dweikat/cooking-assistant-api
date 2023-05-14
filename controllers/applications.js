@@ -14,7 +14,7 @@ exports.getApplications = asyncHandler(async (req, res, next) => {
 
 // @desc create a application
 // @route POST /api/v1/applications/
-// @access Public 
+// @access Private 
 exports.createApplication = asyncHandler(async (req, res, next) => {
     const appKey = crypto.randomUUID()
     
@@ -29,7 +29,7 @@ exports.createApplication = asyncHandler(async (req, res, next) => {
 
 // @desc get a application
 // @route GET /api/v1/applications/:id
-// @access Public 
+// @access Private 
 exports.getApplication = asyncHandler(async (req, res, next) => {
     const application = await Application.find({_id: req.params.id})
     res.status(200).json(application)
@@ -37,7 +37,7 @@ exports.getApplication = asyncHandler(async (req, res, next) => {
 
 // @desc update a application
 // @route PUT /api/v1/applications/:id
-// @access Public 
+// @access Private 
 exports.updateApplication = asyncHandler(async (req, res, next) => {
     const application = await Application.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
@@ -48,7 +48,7 @@ exports.updateApplication = asyncHandler(async (req, res, next) => {
 
 // @desc delete a application
 // @route DELETE /api/v1/applications/:id
-// @access Public 
+// @access Private 
 exports.deleteApplication = asyncHandler(async (req, res, next) => {
     const application = await Application.findByIdAndDelete(req.params.id)
     res.status(200).json(application)
