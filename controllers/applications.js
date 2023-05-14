@@ -1,5 +1,7 @@
 const Application = require('../models/Application')
 const asyncHandler = require('../middlewares/async');
+const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 
 // @desc get all applications
 // @route GET /api/v1/applications/
@@ -14,7 +16,14 @@ exports.getApplications = asyncHandler(async (req, res, next) => {
 // @route POST /api/v1/applications/
 // @access Public 
 exports.createApplication = asyncHandler(async (req, res, next) => {
-    const application = await Application.create(req.body)
+    const appKey = crypto.randomUUID()
+    
+    const salt = await bcrypt.genSalt(10);
+    const hashedAppKey = await bcrypt.hash(appKey, salt);
+    const application = await Application.create({...req.body, appKey: hashedAppKey})
+   
+    application.appKey = appKey
+    
     res.status(200).json(application)
 })
 

@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const crypto = require('crypto');
-const bcrypt = require('bcryptjs');
 
 const ApplicationSchema = new mongoose.Schema(
   {
@@ -28,10 +26,5 @@ const ApplicationSchema = new mongoose.Schema(
   }
 );
 
-ApplicationSchema.pre('save', async function(next) {
-  const appKey = crypto.randomUUID()
-  const salt = await bcrypt.genSalt(10);
-  this.appKey = await bcrypt.hash(appKey, salt);
-});
 
 module.exports = mongoose.model('Application', ApplicationSchema);
