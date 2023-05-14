@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 // @route GET /api/v1/applications/
 // @access Public 
 exports.getApplications = asyncHandler(async (req, res, next) => {
-    let query = Application.find()
+    let query = Application.find({user: req.user._id})
     const applications = await query
     res.status(200).json(applications)
 })
