@@ -5,9 +5,13 @@ const {
   updateUser,
   deleteUser
 } = require('../controllers/users');
+const { protect, authorize } = require('../middlewares/auth');
 
 
 const router = express.Router({ mergeParams: true });
+
+router.use(protect);
+router.use(authorize('admin'));
 
 router
   .route('/')
